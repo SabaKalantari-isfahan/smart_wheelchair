@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Smart Wheelchair</title>
+
+<style>
+    *{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+
+background:#e5e7eb;
+color:#1f2937;
+
+}
+
+.header{
+
+width:100%;
+padding:20px;
+background:#374151;
+
+text-align:center;
+
+font-size:30px;
+font-weight:bold;
+
+color:#facc15;
+
+box-shadow:0 2px 15px rgba(0,0,0,.25);
+
+}
+
+.tabs{
+
+display:flex;
+
+justify-content:center;
+
+background:#4b5563;
+
+}
+
+.tab{
+
+padding:18px;
+
+cursor:pointer;
+
+font-size:18px;
+
+flex:1;
+
+text-align:center;
+
+transition:.3s;
+
+color:white;
+
+}
+
+.tab:hover{
+
+background:#d97706;
+
+}
+
+.active{
+
+background:#d97706;
+
+}
+
+.page{
+
+display:none;
+
+padding:20px;
+
+}
+
+.control-grid{
+
+display:grid;
+
+grid-template-columns:80px 80px 80px;
+
+grid-template-rows:80px 80px 80px;
+
+justify-content:center;
+
+align-items:center;
+
+gap:10px;
+
+margin-top:20px;
+
+}
+
+.btn{
+
+width:70px;
+
+height:70px;
+
+font-size:30px;
+
+border:none;
+
+border-radius:15px;
+
+background:#d97706;
+
+color:white;
+
+cursor:pointer;
+
+transition:.2s;
+
+box-shadow:0 4px 8px rgba(0,0,0,.2);
+
+}
+
+.btn:hover{
+
+background:#b45309;
+
+transform:scale(1.08);
+
+}
+
+.empty{
+
+visibility:hidden;
+
+}
+
+.show{
+
+display:block;
+
+}
+
+.card{
+
+background:#ffffff;
+
+border-radius:15px;
+
+padding:20px;
+
+margin-top:20px;
+
+box-shadow:0 0 15px rgba(0,0,0,.15);
+
+border-left:6px solid #d97706;
+
+}
+
+.value{
+
+font-size:35px;
+
+font-weight:bold;
+
+margin-top:10px;
+
+}
+
+.green{
+
+color:#16a34a;
+
+}
+
+.red{
+
+color:#dc2626;
+
+}
+
+.blue{
+
+color:#2563eb;
+
+}
+
+.center{
+
+text-align:center;
+
+}
+
+.camera{
+
+width:100%;
+
+border-radius:15px;
+
+border:3px solid #d97706;
+
+}
+
+.arrow{
+
+font-size:80px;
+
+margin-top:15px;
+
+color:#374151;
+
+}
+
+.mode-buttons{
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+gap:12px;
+
+margin-top:10px;
+
+}
+
+.mode-btn{
+
+width:180px;
+
+height:55px;
+
+border:none;
+
+border-radius:12px;
+
+background:#d97706;
+
+color:white;
+
+font-size:18px;
+
+cursor:pointer;
+
+transition:.2s;
+
+box-shadow:0 4px 8px rgba(0,0,0,.2);
+
+}
+
+.mode-btn:hover{
+
+background:#b45309;
+
+transform:scale(1.03);
+
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+SMART WHEELCHAIR
+
+</div>
+
+<div class="tabs">
+
+<div class="tab active" onclick="openPage(0)">
+Dashboard
+</div>
+
+<div class="tab" onclick="openPage(1)">
+Camera
+</div>
+
+<div class="tab" onclick="openPage(2)">
+Control
+</div>
+
+<div class="tab" onclick="openPage(3)">
+GPS
+</div>
+
+</div>
+
+<div id="page0" class="page show">
+
+<div class="card center">
+
+<h2>Helmet</h2>
+
+<div id="helmet" class="value green">
+
+ON
+
+</div>
+
+</div>
+
+<div class="card center">
+
+<h2>Direction</h2>
+
+<div id="direction" class="value">
+
+STOP
+
+</div>
+
+<div id="arrow" class="arrow">
+
+⏹
+
+</div>
+
+</div>
+
+<div class="card center">
+
+<h2>Speed</h2>
+
+<div id="speed" class="value blue">
+
+0
+
+</div>
+
+</div>
+
+</div>
+
+<div id="page1" class="page">
+
+<div class="card">
+
+<img class="camera"
+
+src="http://192.168.1.200:81/stream">
+
+</div>
+
+</div>
+
+<div id="page2" class="page">
+
+<div class="card center">
+
+<h2>Control Mode</h2>
+
+<div class="mode-buttons">
+
+<button onclick="setMode('head')" class="mode-btn">
+Head Control
+</button>
+
+<button onclick="setMode('web')" class="mode-btn">
+Web Control
+</button>
+
+</div>
+
+</div>
+
+<div class="card center">
+
+<h2>Move</h2>
+
+<div class="control-grid">
+
+<div class="empty"></div>
+
+<button onclick="sendCmd('forward')" class="btn">
+⬆
+</button>
+
+<div class="empty"></div>
+
+<button onclick="sendCmd('left')" class="btn">
+⬅
+</button>
+
+<button onclick="sendCmd('stop')" class="btn">
+■
+</button>
+
+<button onclick="sendCmd('right')" class="btn">
+➡
+</button>
+
+<div class="empty"></div>
+
+<button onclick="sendCmd('backward')" class="btn">
+⬇
+</button>
+
+<div class="empty"></div>
+
+</div>
+
+</div>
+
+<div class="card center">
+
+<h2>Functions</h2>
+
+<div class="mode-buttons">
+
+<button id="lightBtn" onclick="toggleLight()" class="mode-btn">
+💡 Light ON
+</button>
+
+<button id="hazardBtn" onclick="toggleHazard()" class="mode-btn">
+🚨 Hazard ON
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="page3" class="page">
+
+<div class="card center">
+
+<h2>Location</h2>
+
+<br>
+
+<button class="mode-btn" onclick="openGPS()">
+📍 Open Google Maps
+</button>
+
+</div>
+
+</div>
+
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+
+<script>
+
+let light = false;
+let hazard = false;
+let mode = "web";
+
+
+//================ MQTT ==================
+
+const client = mqtt.connect(
+'wss://a886d29b7e994094a3b61fc014847242.s1.eu.hivemq.cloud:8884/mqtt',
+{
+    username:'smart wheelchair',
+    password:'Aa1091038w',
+    protocolVersion:5,
+    reconnectPeriod:3000
+});
+
+
+client.on('connect',()=>{
+
+    console.log("MQTT Connected");
+
+    client.subscribe("wheelchair/status");
+
+    client.subscribe("wheelchair/gps");
+
+});
+
+
+
+client.on('error',(error)=>{
+
+    console.log("MQTT Error:",error);
+
+});
+
+
+
+client.on('message',(topic,message)=>{
+
+
+    let msg = message.toString();
+
+
+    console.log(topic,msg);
+
+
+
+    //========== STATUS ==========
+
+    if(topic=="wheelchair/status"){
+
+
+        let data = JSON.parse(msg);
+
+
+
+        document.getElementById("speed").innerHTML=data.speed;
+
+
+        document.getElementById("direction").innerHTML=data.direction;
+
+
+
+        if(data.helmet=="ON"){
+
+
+            document.getElementById("helmet").innerHTML="ON";
+
+            document.getElementById("helmet").className="value green";
+
+
+        }
+
+        else{
+
+
+            document.getElementById("helmet").innerHTML="OFF";
+
+            document.getElementById("helmet").className="value red";
+
+
+        }
+
+
+
+
+        let arrow="⏹";
+
+
+
+        switch(data.direction){
+
+
+            case "FORWARD":
+
+                arrow="⬆";
+
+            break;
+
+
+
+            case "BACKWARD":
+
+                arrow="⬇";
+
+            break;
+
+
+
+            case "LEFT":
+
+                arrow="⬅";
+
+            break;
+
+
+
+            case "RIGHT":
+
+                arrow="➡";
+
+            break;
+
+
+
+            default:
+
+                arrow="⏹";
+
+            break;
+
+
+        }
+
+
+
+        document.getElementById("arrow").innerHTML=arrow;
+
+
+    }
+
+
+
+
+    //========== GPS ==========
+
+    if(topic=="wheelchair/gps"){
+
+
+        window.open(msg,"_blank");
+
+
+    }
+
+
+});
+
+
+
+
+//================ LIGHT ==================
+
+
+function toggleLight(){
+
+
+    light=!light;
+
+
+    document.getElementById("lightBtn").innerHTML =
+
+    light ? "💡 Light OFF" : "💡 Light ON";
+
+
+
+    client.publish(
+
+        "wheelchair/light",
+
+        light ? "ON" : "OFF"
+
+    );
+
+
+}
+
+
+
+
+
+//================ GPS ====================
+
+
+function openGPS(){
+
+
+    client.publish(
+
+        "wheelchair/gps",
+
+        "GET"
+
+    );
+
+
+}
+
+
+
+
+
+//================ MOVE ===================
+
+
+function sendCmd(cmd){
+
+
+    client.publish(
+
+        "wheelchair/cmd",
+
+        cmd.toUpperCase()
+
+    );
+
+
+}
+
+
+
+
+
+//================ HAZARD =================
+
+
+function toggleHazard(){
+
+
+    hazard=!hazard;
+
+
+
+    document.getElementById("hazardBtn").innerHTML =
+
+    hazard ? "🚨 Hazard OFF" : "🚨 Hazard ON";
+
+
+
+    client.publish(
+
+        "wheelchair/hazard",
+
+        hazard ? "ON" : "OFF"
+
+    );
+
+
+}
+
+
+
+
+
+//================ MODE ===================
+
+
+function setMode(value){
+
+
+    mode=value;
+
+
+
+    client.publish(
+
+        "wheelchair/mode",
+
+        value
+
+    );
+
+
+}
+
+
+
+
+
+//================ PAGES ==================
+
+
+function openPage(index){
+
+
+    let pages=document.getElementsByClassName("page");
+
+    let tabs=document.getElementsByClassName("tab");
+
+
+
+    for(let i=0;i<pages.length;i++){
+
+
+        pages[i].classList.remove("show");
+
+        tabs[i].classList.remove("active");
+
+
+    }
+
+
+
+    pages[index].classList.add("show");
+
+    tabs[index].classList.add("active");
+
+
+}
+
+
+
+</script>
+
+</body>
+
+</html>
