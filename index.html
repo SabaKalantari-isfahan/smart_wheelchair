@@ -29,7 +29,10 @@ align-items:center;
 background:
 linear-gradient(135deg,#0f172a,#1e293b,#111827);
 
-overflow:hidden;
+
+overflow-x:hidden;
+overflow-y:auto;
+
 
 color:white;
 
@@ -66,11 +69,15 @@ text-align:center;
 }
 
 .logo{
+    margin-bottom:20px;
+}
 
-font-size:70px;
-
-margin-bottom:20px;
-
+.logo img{
+    width:240px;
+    max-width:100%;
+    height:auto;
+    display:block;
+    margin:0 auto;
 }
 
 h1{
@@ -175,9 +182,10 @@ opacity:.7;
     border-radius:20px;
 }
 
-.logo{
-    font-size:50px;
-    margin-bottom:15px;
+.logo img{
+
+    width:160px;
+
 }
 
 h1{
@@ -236,8 +244,9 @@ body:after{
     padding:25px 18px;
 }
 
-.logo{
-    font-size:42px;
+
+.logo img{
+    width:130px;
 }
 
 h1{
@@ -276,7 +285,7 @@ button{
 <div class="card">
 
 <div class="logo">
-🦽
+<img src="./AB5B6732-364A-42E0-9E80-7E419712DC25.png" alt="">
 </div>
 
 <h1>SMART WHEELCHAIR</h1>
@@ -295,7 +304,7 @@ Smart Safety System
 
 </div>
 
-<button onclick="location.href='http://45.94.214.62'">
+<button onclick="checkPassword()">
 
 ENTER CONTROL PANEL
 
@@ -322,6 +331,24 @@ Smart Helmet Controlled Wheelchair Project
 </div>
 
 </div>
+<script>
 
+function checkPassword(){
+
+    let password = prompt("Enter Password:");
+
+    if(password === "1111"){
+
+        location.href = "http://45.94.214.62";
+
+    }else{
+
+        alert("Wrong Password!");
+
+    }
+
+}
+
+</script>
 </body>
 </html>
