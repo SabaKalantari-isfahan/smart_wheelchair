@@ -1,207 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Smart Wheelchair</title>
 
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
     min-height:100vh;
-    padding:20px;
     display:flex;
     justify-content:center;
     align-items:center;
-    overflow-y:auto;
+    padding:20px;
+    background:linear-gradient(135deg,#0f172a,#1e293b,#111827);
+    overflow-x:hidden;
+    color:#fff;
+    position:relative;
 }
 
-body:before{
-
-content:"";
-
-position:absolute;
-
-width:700px;
-height:700px;
-
-background:#f59e0b;
-
-filter:blur(180px);
-
-opacity:.15;
-
-border-radius:50%;
-
-top:-250px;
-
-right:-250px;
-
+body::before{
+    content:"";
+    position:fixed;
+    width:700px;
+    height:700px;
+    background:#f59e0b;
+    filter:blur(180px);
+    opacity:.15;
+    border-radius:50%;
+    top:-250px;
+    right:-250px;
+    z-index:0;
 }
 
-body:after{
-
-content:"";
-
-position:absolute;
-
-width:600px;
-height:600px;
-
-background:#2563eb;
-
-filter:blur(180px);
-
-opacity:.12;
-
-border-radius:50%;
-
-bottom:-200px;
-
-left:-200px;
-
+body::after{
+    content:"";
+    position:fixed;
+    width:600px;
+    height:600px;
+    background:#2563eb;
+    filter:blur(180px);
+    opacity:.12;
+    border-radius:50%;
+    bottom:-200px;
+    left:-200px;
+    z-index:0;
 }
 
 .card{
-
-position:relative;
-
-z-index:5;
-
-width:750px;
-
-max-width:90%;
-
-padding:60px;
-
-background:rgba(255,255,255,.05);
-
-backdrop-filter:blur(20px);
-
-border:1px solid rgba(255,255,255,.1);
-
-border-radius:25px;
-
-box-shadow:0 20px 50px rgba(0,0,0,.45);
-
-text-align:center;
-
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:750px;
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:25px;
+    box-shadow:0 20px 50px rgba(0,0,0,.45);
+    padding:60px;
+    text-align:center;
 }
 
 .logo{
-
-font-size:70px;
-
-margin-bottom:20px;
-
+    font-size:70px;
+    margin-bottom:20px;
 }
 
 h1{
-
-font-size:48px;
-
-margin-bottom:10px;
-
-color:#fbbf24;
-
+    color:#fbbf24;
+    font-size:48px;
+    line-height:1.2;
+    text-align:center;
+    margin-bottom:10px;
 }
 
 h2{
-
-font-size:24px;
-
-font-weight:normal;
-
-color:#d1d5db;
-
-margin-bottom:35px;
-
+    color:#d1d5db;
+    font-size:24px;
+    font-weight:400;
+    margin-bottom:35px;
 }
 
 .info{
-
-font-size:18px;
-
-line-height:1.8;
-
-color:#f3f4f6;
-
-margin-bottom:40px;
-
-}
-
-.creator{
-
-margin-top:25px;
-
-font-size:18px;
-
-color:#cbd5e1;
-
-}
-
-.creator b{
-
-color:#fbbf24;
-
+    font-size:18px;
+    line-height:1.8;
+    margin-bottom:40px;
 }
 
 button{
-
-padding:18px 45px;
-
-font-size:22px;
-
-font-weight:bold;
-
-border:none;
-
-border-radius:15px;
-
-cursor:pointer;
-
-background:#f59e0b;
-
-color:white;
-
-transition:.3s;
-
-box-shadow:0 10px 30px rgba(245,158,11,.45);
-
+    background:#f59e0b;
+    color:#fff;
+    border:none;
+    border-radius:15px;
+    padding:18px 45px;
+    font-size:22px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:0 10px 30px rgba(245,158,11,.45);
 }
 
 button:hover{
+    background:#d97706;
+    transform:scale(1.05);
+}
 
-transform:translateY(-4px) scale(1.05);
+.creator{
+    margin-top:30px;
+    font-size:18px;
+    color:#cbd5e1;
+    line-height:1.8;
+}
 
-background:#d97706;
-
+.creator b{
+    color:#fbbf24;
 }
 
 .footer{
-
-margin-top:40px;
-
-font-size:14px;
-
-opacity:.7;
-
+    margin-top:30px;
+    font-size:14px;
+    opacity:.7;
 }
-@media (max-width: 768px) {
+
+/* Mobile */
+
+@media (max-width:768px){
 
 .card{
-    width:95%;
     padding:30px 20px;
-    border-radius:18px;
 }
 
 .logo{
@@ -214,83 +148,82 @@ h1{
 
 h2{
     font-size:18px;
-    margin-bottom:25px;
 }
 
 .info{
     font-size:16px;
-    line-height:1.7;
-    margin-bottom:30px;
 }
 
 button{
     width:100%;
-    padding:16px;
     font-size:18px;
+    padding:16px;
 }
 
 .creator{
     font-size:16px;
 }
 
-.footer{
-    font-size:12px;
+}
+
+@media (max-width:400px){
+
+h1{
+    font-size:24px;
+}
+
+h2{
+    font-size:16px;
+}
+
+.info{
+    font-size:14px;
+}
+
+.creator{
+    font-size:14px;
+}
+
+button{
+    font-size:16px;
 }
 
 }
 
 </style>
-
 </head>
 
 <body>
 
 <div class="card">
 
-<div class="logo">
-🦽
-</div>
+<div class="logo">🦽</div>
 
 <h1>SMART WHEELCHAIR</h1>
 
 <h2>Helmet Controlled Smart Wheelchair</h2>
 
 <div class="info">
-
 Real-Time ESP32 Camera<br>
-
 Remote Web Control<br>
-
 GPS Tracking<br>
-
 Smart Safety System
-
 </div>
 
 <button onclick="location.href='http://45.94.214.62'">
-
 ENTER CONTROL PANEL
-
 </button>
 
 <div class="creator">
-
-Designed & Developed by
-
+Designed &amp; Developed by
 <br><br>
-
 <b>Saba Kalantari</b>
-
 <br>
-
 Smart Helmet Controlled Wheelchair Project
-
 </div>
 
 <div class="footer">
-
 © 2026 Smart Wheelchair Project
-
 </div>
 
 </div>
