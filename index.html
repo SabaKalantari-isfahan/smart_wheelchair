@@ -17,22 +17,12 @@ font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-
-height:100vh;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-background:
-linear-gradient(135deg,#0f172a,#1e293b,#111827);
-
-overflow:hidden;
-
-color:white;
-
+    min-height:100vh;
+    padding:20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow-y:auto;
 }
 
 body:before{
@@ -204,6 +194,48 @@ margin-top:40px;
 font-size:14px;
 
 opacity:.7;
+
+}
+@media (max-width: 768px) {
+
+.card{
+    width:95%;
+    padding:30px 20px;
+    border-radius:18px;
+}
+
+.logo{
+    font-size:50px;
+}
+
+h1{
+    font-size:30px;
+}
+
+h2{
+    font-size:18px;
+    margin-bottom:25px;
+}
+
+.info{
+    font-size:16px;
+    line-height:1.7;
+    margin-bottom:30px;
+}
+
+button{
+    width:100%;
+    padding:16px;
+    font-size:18px;
+}
+
+.creator{
+    font-size:16px;
+}
+
+.footer{
+    font-size:12px;
+}
 
 }
 
