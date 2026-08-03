@@ -1,0 +1,15 @@
+{
+  "name": "Smart Wheelchair",
+  "short_name": "Wheelchair",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "./AB5B6732-364A-42E0-9E80-7E419712DC25.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
